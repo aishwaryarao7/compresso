@@ -4,6 +4,8 @@ var compressedArray = [];
 var hashedWords = []; 
 var gameFinsihed = false;
 var timeTaken = 0;
+var hintWords = [];
+var arr = [];
 
 $(function(){
 
@@ -17,7 +19,7 @@ $(function(){
    var strWithoutSymbols = removeSymbols(str); //will remove symbols 
 
    //Code to split the string to individual words and put them on screen for dragging
-   var arr = str.split(" ");
+   arr = str.split(" ");
    putString(arr); //Implemented using iterator pattern
 
    //This array has been created to compare draggedWords with words without symbols like period, comma or exclamation.
@@ -101,7 +103,21 @@ clock.on('finish.countdown', function(event){
 });
 //timer code ends here
 
-
+//hint code starts here
+function hint(){
+	var l = 0;
+	var score = $("#score").html();
+	$("#score").html(parseInt(score) - 5);
+	for (var p = 0; p < numberOfWords; p++) {
+		for (var q = p; q < numberOfWords; q++) {
+			if(arr[p] == arr[q]) {
+			hintWords.push(arr[p]);
+			l++;
+		}
+	}}
+	alert(hintWords[Math.floor(Math.random()*l)]);
+}
+//hint code ends here
 
 
 
